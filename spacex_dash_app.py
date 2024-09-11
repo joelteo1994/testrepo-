@@ -27,10 +27,10 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                                 {'label': 'CCAFS SLC-40', 'value':'CCAFS SLC-40'},
                                                 {'label': 'KSC LC-39A', 'value':'KSC LC-39A'},
                                                 {'label': 'VAFB SLC-4E', 'value':'VAFB SLC-4E'},
-                                              ])
+                                              ],
                                               value='ALL',
                                               placeholder='Select a Launch Site here',
-                                              searchable=True
+                                              searchable=True),
                                 html.Br(),
 
                                 # TASK 2: Add a pie chart to show the total successful launches count for all sites
@@ -58,7 +58,7 @@ def get_pie_chart(entered_site):
         fig = px.pie(spacex_df, values='class', names='Launch Site', title='Total Success Launches for All Sites')
         return fig 
     else: 
-        filtered_df = spacex_df[spacex_df['Launch Site'] == entered_site].groupby(['Launch Site', 'Class']).size().reset_index(name="class count")
+        filtered_df = spacex_df[spacex_df['Launch Site'] == entered_site].groupby(['Launch Site', 'class']).size().reset_index(name="class count")
         fig = px.pie(filtered_df, values='class count', names='class', title='Total Success Launches for {}'.format(entered_site))
         return fig 
 
